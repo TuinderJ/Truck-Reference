@@ -8,7 +8,7 @@ export default function Navbar() {
     const linksContainer = document.getElementById('links-container');
     if (!linksContainer) return;
 
-    linksContainer.style.display === 'none' ? (linksContainer.style.display = 'flex') : (linksContainer.style.display = 'none');
+    linksContainer.style.display === 'flex' ? (linksContainer.style.display = 'none') : (linksContainer.style.display = 'flex');
   };
 
   return (

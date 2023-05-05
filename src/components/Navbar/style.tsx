@@ -49,7 +49,7 @@ export const LinksContainer = styled.div`
   padding: 0.25rem;
   display: none;
   /* remove */
-  display: flex;
+  /* display: flex; */
   /* remove */
   flex-direction: column;
   align-items: center;
@@ -57,6 +57,7 @@ export const LinksContainer = styled.div`
   font-size: 1.25rem;
 
   @media screen and (min-width: ${screenSize}) {
+    display: flex;
     flex-direction: row;
     background-color: inherit;
     padding: 1rem;

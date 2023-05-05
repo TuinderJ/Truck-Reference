@@ -1,5 +1,5 @@
 // Colors
-export const light = '#6ba9ff';
+export const light = '#e7f1ff';
 export const medium = '#4c8fed';
 export const dark = '#144ea2';
 
