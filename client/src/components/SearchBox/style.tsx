@@ -8,7 +8,12 @@ export const SearchForm = styled.form`
   padding: 1rem 0.25rem;
 `;
 
-export const SearchBar = styled.input``;
+export const SearchBar = styled.input`
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  border: 2px solid ${dark};
+`;
 
 export const OptionsContainer = styled.div`
   display: flex;
@@ -30,7 +35,6 @@ export const Option = styled.div`
 
   &.selected {
     background-color: white;
-    /* border: 1px solid ${dark}; */
     border-radius: 0.25rem;
     box-shadow: 0px 1px 5px rgb(129, 129, 129);
   }
@@ -42,4 +46,11 @@ export const OptionRadio = styled.input`
 
 export const OptionLabel = styled.label``;
 
-export const SearchButton = styled.button``;
+export const SearchButton = styled.button`
+  background-color: ${dark};
+  color: white;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  border: none;
+  border-radius: 0.25rem;
+`;
