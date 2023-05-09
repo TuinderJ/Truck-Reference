@@ -1,11 +1,25 @@
 import styled from 'styled-components';
-import { light, medium, dark } from '../../utils/styleUtils';
+import { light, medium, dark, screenSize } from '../../utils/styleUtils';
+
+export const SearchBoxContainer = styled.div`
+  @media screen and (min-width: ${screenSize}) {
+    max-width: 40rem;
+    margin: 3rem auto;
+    padding: 3rem;
+    background-color: white;
+    box-shadow: 0px 1px 5px rgb(129, 129, 129);
+    border-radius: 0.5rem;
+  }
+`;
 
 export const SearchForm = styled.form`
   display: flex;
   flex-direction: column;
-  background-color: white;
   padding: 1rem 0.25rem;
+
+  @media screen and (min-width: ${screenSize}) {
+    padding: 0;
+  }
 `;
 
 export const SearchBar = styled.input`
@@ -41,7 +55,8 @@ export const Option = styled.div`
 `;
 
 export const OptionRadio = styled.input`
-  display: none;
+  opacity: 0;
+  position: absolute;
 `;
 
 export const OptionLabel = styled.label``;
