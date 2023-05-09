@@ -22,7 +22,7 @@ export default function Navbar() {
         </MenuIcon>
       </LogoContainer>
       <LinksContainer id='links-container'>
-        <NavLink to={'/'}>New Vehicle</NavLink>
+        <NavLink to={'/new_vehicle'}>New Vehicle</NavLink>
         <NavLink to={'/'}>Edit Vehicle</NavLink>
         <NavLink to={'/'}>Remove Vehicle</NavLink>
         <LogButton>Logout</LogButton>

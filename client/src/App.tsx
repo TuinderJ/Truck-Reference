@@ -1,15 +1,17 @@
 import { Route, Routes } from 'react-router';
 import './App.css';
-import Navbar from './components/Navbar';
-import HomePage from './components/HomePage';
+import { Navbar, HomePage, NewVehicle } from './components';
 
 function App() {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path='/' element={<HomePage />}></Route>
-      </Routes>
+      <main>
+        <Routes>
+          <Route path='/' element={<HomePage />}></Route>
+          <Route path='/new_vehicle/' element={<NewVehicle />}></Route>
+        </Routes>
+      </main>
     </>
   );
 }
