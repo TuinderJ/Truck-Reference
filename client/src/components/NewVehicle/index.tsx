@@ -38,12 +38,6 @@ export default function NewVehicle() {
     ],
   });
 
-  const addCategory = () => {
-    const newVehicleInformationState = { ...vehicleInformationState };
-    newVehicleInformationState.categories.push({ title: '', items: [{ label: '', value: '' }] });
-    setVehicleInformationState(newVehicleInformationState);
-  };
-
   return (
     <>
       <MainContainer>
