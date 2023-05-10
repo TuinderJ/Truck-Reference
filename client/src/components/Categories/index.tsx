@@ -1,12 +1,23 @@
-import { CategoriesContainer, CategoryContainer, Contents, Label, NewCategoryButton, NewItemButton, Title, TrashIcon, Value } from './style';
+import { CategoriesContainer, CategoryContainer, CategoryList, Contents, Label, LabelValueContainer, NewCategoryButton, NewItemButton, Title, TitleContainer, TrashIcon, Value } from './style';
 import { Categoryprops, CategoriesOnChange } from '../types';
 import { FaTrash } from 'react-icons/fa';
 
-export default function Categories({ editable, vehicleInformationState, setVehicleInformationState }: Categoryprops) {
+export default function Categories({ editable = false, vehicleInformationState, setVehicleInformationState }: Categoryprops) {
   const onFormChange = ({ e, type, categoryIndex, itemIndex }: CategoriesOnChange) => {
-    console.log('hi');
     const newVehicleInformationState = { ...vehicleInformationState };
     switch (type) {
+      case 'UNIT NUMBER':
+        newVehicleInformationState.unitNumber = e?.currentTarget.value || '';
+        break;
+      case 'CUSTOMER UNIT NUMBER':
+        newVehicleInformationState.customerUnitNumber = e?.currentTarget.value || '';
+        break;
+      case 'VIN':
+        newVehicleInformationState.vin = e?.currentTarget.value || '';
+        break;
+      case 'CUSTOMER':
+        newVehicleInformationState.customer = e?.currentTarget.value || '';
+        break;
       case 'TITLE':
         newVehicleInformationState.categories[categoryIndex || 0].title = e?.currentTarget.value || '';
         break;
@@ -28,8 +39,6 @@ export default function Categories({ editable, vehicleInformationState, setVehic
       case 'REMOVE ITEM':
         newVehicleInformationState.categories[categoryIndex || 0].items.splice(itemIndex || 0, 1);
         break;
-      default:
-        break;
     }
     setVehicleInformationState(newVehicleInformationState);
   };
@@ -37,47 +46,108 @@ export default function Categories({ editable, vehicleInformationState, setVehic
   return (
     <>
       <CategoriesContainer>
-        {vehicleInformationState.categories.map((category, categoryIndex) => (
-          <CategoryContainer key={categoryIndex}>
-            <Title value={category.title} readOnly={!editable} onChange={e => onFormChange({ e, type: 'TITLE', categoryIndex })} className={editable ? 'editable' : 'not editable'} />
-            {editable ? (
-              <TrashIcon onClick={() => onFormChange({ type: 'REMOVE CATEGORY', categoryIndex })}>
-                <FaTrash />
-              </TrashIcon>
-            ) : (
-              <></>
-            )}
+        <CategoryList>
+          <CategoryContainer>
+            <TitleContainer>
+              <Title value='Details' readOnly className='not-editable' />
+            </TitleContainer>
             <Contents>
-              {category.items.map((item, itemIndex) => (
-                <div key={itemIndex}>
-                  <Label value={item.label} readOnly={!editable} onChange={e => onFormChange({ e, type: 'LABEL', categoryIndex, itemIndex })} className={editable ? 'editable' : 'not editable'} />
-                  <Value value={item.value} readOnly={!editable} onChange={e => onFormChange({ e, type: 'VALUE', categoryIndex, itemIndex })} className={editable ? 'editable' : 'not editable'} />
-                  {editable ? (
-                    <TrashIcon onClick={() => onFormChange({ type: 'REMOVE ITEM', categoryIndex, itemIndex })}>
-                      <FaTrash />
-                    </TrashIcon>
-                  ) : (
-                    <></>
-                  )}
-                </div>
-              ))}
+              <LabelValueContainer>
+                <Label value='Unit Number' readOnly className='not-editable' />
+                <Value
+                  value={vehicleInformationState.unitNumber}
+                  readOnly={!editable}
+                  onChange={e => onFormChange({ e, type: 'UNIT NUMBER' })}
+                  className={editable ? 'editable' : 'not-editable'}
+                  placeholder={editable ? 'Unit Number' : ''}
+                />
+              </LabelValueContainer>
+              <LabelValueContainer>
+                <Label value='Customer Unit Number' readOnly className='not-editable' />
+                <Value
+                  value={vehicleInformationState.customerUnitNumber}
+                  readOnly={!editable}
+                  onChange={e => onFormChange({ e, type: 'CUSTOMER UNIT NUMBER' })}
+                  className={editable ? 'editable' : 'not-editable'}
+                  placeholder={editable ? 'Customer Unit Number' : ''}
+                />
+              </LabelValueContainer>
+              <LabelValueContainer>
+                <Label value='VIN' readOnly className='not-editable' />
+                <Value value={vehicleInformationState.vin} readOnly={!editable} onChange={e => onFormChange({ e, type: 'VIN' })} className={editable ? 'editable' : 'not-editable'} placeholder={editable ? 'VIN' : ''} />
+              </LabelValueContainer>
+              <LabelValueContainer>
+                <Label value='Customer' readOnly className='not-editable' />
+                <Value value={vehicleInformationState.customer} readOnly={!editable} onChange={e => onFormChange({ e, type: 'CUSTOMER' })} className={editable ? 'editable' : 'not-editable'} placeholder={editable ? 'Value' : ''} />
+              </LabelValueContainer>
+              <LabelValueContainer>
+                <Label value='Last 8' readOnly className='not-editable' />
+                <Value value={vehicleInformationState.vin.substring(8)} readOnly className='not-editable' />
+              </LabelValueContainer>
             </Contents>
-            {editable ? (
-              <NewItemButton type='button' onClick={() => onFormChange({ type: 'ADD ITEM', categoryIndex })}>
-                Add An Item
-              </NewItemButton>
-            ) : (
-              <></>
-            )}
-            {editable ? (
-              <NewCategoryButton type='button' onClick={() => onFormChange({ type: 'ADD CATEGORY' })}>
-                Add a Category
-              </NewCategoryButton>
-            ) : (
-              <></>
-            )}
           </CategoryContainer>
-        ))}
+          {vehicleInformationState.categories.map((category, categoryIndex) => (
+            <CategoryContainer key={categoryIndex}>
+              <TitleContainer>
+                <Title
+                  value={category.title}
+                  readOnly={!editable}
+                  onChange={e => onFormChange({ e, type: 'TITLE', categoryIndex })}
+                  className={editable ? 'editable' : 'not-editable'}
+                  placeholder={editable ? 'Category Title' : ''}
+                />
+                {editable ? (
+                  <TrashIcon type='button' onClick={() => onFormChange({ type: 'REMOVE CATEGORY', categoryIndex })}>
+                    <FaTrash />
+                  </TrashIcon>
+                ) : (
+                  <></>
+                )}
+              </TitleContainer>
+              <Contents>
+                {category.items.map((item, itemIndex) => (
+                  <LabelValueContainer key={itemIndex}>
+                    <Label
+                      value={item.label}
+                      readOnly={!editable}
+                      onChange={e => onFormChange({ e, type: 'LABEL', categoryIndex, itemIndex })}
+                      className={editable ? 'editable' : 'not-editable'}
+                      placeholder={editable ? 'Label' : ''}
+                    />
+                    <Value
+                      value={item.value}
+                      readOnly={!editable}
+                      onChange={e => onFormChange({ e, type: 'VALUE', categoryIndex, itemIndex })}
+                      className={editable ? 'editable' : 'not-editable'}
+                      placeholder={editable ? 'Value' : ''}
+                    />
+                    {editable ? (
+                      <TrashIcon type='button' onClick={() => onFormChange({ type: 'REMOVE ITEM', categoryIndex, itemIndex })}>
+                        <FaTrash />
+                      </TrashIcon>
+                    ) : (
+                      <></>
+                    )}
+                  </LabelValueContainer>
+                ))}
+              </Contents>
+              {editable ? (
+                <NewItemButton type='button' onClick={() => onFormChange({ type: 'ADD ITEM', categoryIndex })}>
+                  Add An Item
+                </NewItemButton>
+              ) : (
+                <></>
+              )}
+            </CategoryContainer>
+          ))}
+        </CategoryList>
+        {editable ? (
+          <NewCategoryButton type='button' onClick={() => onFormChange({ type: 'ADD CATEGORY' })}>
+            Add a Category
+          </NewCategoryButton>
+        ) : (
+          <></>
+        )}
       </CategoriesContainer>
     </>
   );

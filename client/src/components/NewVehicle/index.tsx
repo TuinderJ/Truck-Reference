@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { Categories } from '../index';
-import { BasicInfoContainer, MainContainer, NewVehicleForm, SubmitButton } from './style';
+import { MainContainer, NewVehicleForm, SubmitButton } from './style';
 
 export default function NewVehicle() {
   const [vehicleInformationState, setVehicleInformationState] = useState({
+    unitNumber: '272131',
+    customerUnitNumber: '123',
+    vin: '12345678LD123456',
+    customer: 'Triple S',
     categories: [
       {
         title: 'Engine',
@@ -38,14 +42,16 @@ export default function NewVehicle() {
     ],
   });
 
+  const onFormSubmit = (e: React.FormEvent<EventTarget>) => {
+    e.preventDefault();
+    console.log('Form submit');
+  };
+
   return (
     <>
       <MainContainer>
-        <NewVehicleForm>
+        <NewVehicleForm onSubmit={onFormSubmit}>
           <SubmitButton type='submit'>Submit</SubmitButton>
-          <BasicInfoContainer>
-            <>Basic Info Goes Here</>
-          </BasicInfoContainer>
           <Categories vehicleInformationState={vehicleInformationState} setVehicleInformationState={setVehicleInformationState} editable={false}></Categories>
           <SubmitButton type='submit'>Submit</SubmitButton>
         </NewVehicleForm>

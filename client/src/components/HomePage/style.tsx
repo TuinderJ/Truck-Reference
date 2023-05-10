@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { light, medium, dark, screenSize } from '../../utils/styleUtils';
+import { light, medium, dark, screenSize, defaultButtonStyles } from '../../utils/styleUtils';
 
 export const SearchBoxContainer = styled.div`
   @media screen and (min-width: ${screenSize}) {
@@ -62,10 +62,6 @@ export const OptionRadio = styled.input`
 export const OptionLabel = styled.label``;
 
 export const SearchButton = styled.button`
-  background-color: ${dark};
-  color: white;
-  padding: 0.5rem;
+  ${defaultButtonStyles}
   font-size: 1.25rem;
-  border: none;
-  border-radius: 0.25rem;
 `;

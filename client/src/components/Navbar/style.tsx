@@ -21,7 +21,7 @@ export const LogoContainer = styled.div`
 `;
 
 export const Logo = styled.img`
-  height: 4rem;
+  height: 3rem;
 
   @media screen and (min-width: ${screenSize}) {
     height: 5rem;

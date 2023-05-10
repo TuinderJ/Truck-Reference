@@ -1,4 +1,8 @@
 export type VehicleInformation = {
+  unitNumber: string;
+  customerUnitNumber: string;
+  vin: string;
+  customer: string;
   categories: Array<{
     title: string;
     items: Array<{
@@ -21,4 +25,4 @@ export type CategoriesOnChange = {
   itemIndex?: number;
 };
 
-export type CategoryChangeType = 'TITLE' | 'LABEL' | 'VALUE' | 'ADD CATEGORY' | 'REMOVE CATEGORY' | 'ADD ITEM' | 'REMOVE ITEM';
+export type CategoryChangeType = 'UNIT NUMBER' | 'CUSTOMER UNIT NUMBER' | 'VIN' | 'CUSTOMER' | 'TITLE' | 'LABEL' | 'VALUE' | 'ADD CATEGORY' | 'REMOVE CATEGORY' | 'ADD ITEM' | 'REMOVE ITEM';
