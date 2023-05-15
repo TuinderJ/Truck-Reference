@@ -13,4 +13,5 @@ export const defaultButtonStyles = css`
   padding: 0.5rem;
   border: none;
   border-radius: 0.25rem;
+  cursor: pointer;
 `;

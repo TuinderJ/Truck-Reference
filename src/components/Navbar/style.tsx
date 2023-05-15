@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { medium, dark, screenSize } from '../../utils/styleUtils';
 import { Link } from 'react-router-dom';
 
@@ -48,9 +48,6 @@ export const LinksContainer = styled.div`
   background-color: #cfe1fa;
   padding: 0.25rem;
   display: none;
-  /* remove */
-  /* display: flex; */
-  /* remove */
   flex-direction: column;
   align-items: center;
   gap: 1rem;
@@ -64,13 +61,25 @@ export const LinksContainer = styled.div`
   }
 `;
 
-export const NavLink = styled(Link)`
+const navStyles = css`
   color: ${dark};
   text-decoration: none;
+  background-color: inherit;
+  border: none;
+  font-size: inherit;
+  cursor: pointer;
 
   @media screen and (min-width: ${screenSize}) {
     color: white;
   }
+`;
+
+export const NavLink = styled(Link)`
+  ${navStyles}
+`;
+
+export const RemoveVehicleButton = styled.button`
+  ${navStyles}
 `;
 
 export const LogButton = styled.button`

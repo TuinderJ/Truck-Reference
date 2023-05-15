@@ -7,16 +7,16 @@ export default function Categories({ editable = false, vehicleInformationState, 
     const newVehicleInformationState = { ...vehicleInformationState };
     switch (type) {
       case 'UNIT NUMBER':
-        newVehicleInformationState.unitNumber = e?.currentTarget.value || '';
+        newVehicleInformationState.unitNumber = e?.currentTarget.value.toUpperCase() || '';
         break;
       case 'CUSTOMER UNIT NUMBER':
-        newVehicleInformationState.customerUnitNumber = e?.currentTarget.value || '';
-        break;
-      case 'VIN':
-        newVehicleInformationState.vin = e?.currentTarget.value || '';
+        newVehicleInformationState.customerUnitNumber = e?.currentTarget.value.toUpperCase() || '';
         break;
       case 'CUSTOMER':
-        newVehicleInformationState.customer = e?.currentTarget.value || '';
+        newVehicleInformationState.customer = e?.currentTarget.value.toUpperCase() || '';
+        break;
+      case 'VIN':
+        newVehicleInformationState.vin = e?.currentTarget.value.toUpperCase() || '';
         break;
       case 'TITLE':
         newVehicleInformationState.categories[categoryIndex || 0].title = e?.currentTarget.value || '';
@@ -40,7 +40,7 @@ export default function Categories({ editable = false, vehicleInformationState, 
         newVehicleInformationState.categories[categoryIndex || 0].items.splice(itemIndex || 0, 1);
         break;
     }
-    setVehicleInformationState(newVehicleInformationState);
+    if (setVehicleInformationState) setVehicleInformationState(newVehicleInformationState);
   };
 
   return (
@@ -49,40 +49,53 @@ export default function Categories({ editable = false, vehicleInformationState, 
         <CategoryList>
           <CategoryContainer>
             <TitleContainer>
-              <Title value='Details' readOnly className='not-editable' />
+              <Title value='Details' readOnly tabIndex={-1} className='not-editable' />
             </TitleContainer>
             <Contents>
               <LabelValueContainer>
-                <Label value='Unit Number' readOnly className='not-editable' />
+                <Label readOnly tabIndex={-1} className='not-editable' value='Unit Number' />
                 <Value
                   value={vehicleInformationState.unitNumber}
                   readOnly={!editable}
-                  onChange={e => onFormChange({ e, type: 'UNIT NUMBER' })}
+                  onChange={(e) => onFormChange({ e, type: 'UNIT NUMBER' })}
                   className={editable ? 'editable' : 'not-editable'}
                   placeholder={editable ? 'Unit Number' : ''}
                 />
               </LabelValueContainer>
               <LabelValueContainer>
-                <Label value='Customer Unit Number' readOnly className='not-editable' />
+                <Label readOnly tabIndex={-1} className='not-editable' value='Customer Unit Number' />
                 <Value
                   value={vehicleInformationState.customerUnitNumber}
                   readOnly={!editable}
-                  onChange={e => onFormChange({ e, type: 'CUSTOMER UNIT NUMBER' })}
+                  onChange={(e) => onFormChange({ e, type: 'CUSTOMER UNIT NUMBER' })}
                   className={editable ? 'editable' : 'not-editable'}
                   placeholder={editable ? 'Customer Unit Number' : ''}
                 />
               </LabelValueContainer>
               <LabelValueContainer>
-                <Label value='VIN' readOnly className='not-editable' />
-                <Value value={vehicleInformationState.vin} readOnly={!editable} onChange={e => onFormChange({ e, type: 'VIN' })} className={editable ? 'editable' : 'not-editable'} placeholder={editable ? 'VIN' : ''} />
+                <Label readOnly tabIndex={-1} className='not-editable' value='Customer' />
+                <Value
+                  value={vehicleInformationState.customer}
+                  readOnly={!editable}
+                  onChange={(e) => onFormChange({ e, type: 'CUSTOMER' })}
+                  className={editable ? 'editable' : 'not-editable'}
+                  placeholder={editable ? 'Customer' : ''}
+                />
               </LabelValueContainer>
               <LabelValueContainer>
-                <Label value='Customer' readOnly className='not-editable' />
-                <Value value={vehicleInformationState.customer} readOnly={!editable} onChange={e => onFormChange({ e, type: 'CUSTOMER' })} className={editable ? 'editable' : 'not-editable'} placeholder={editable ? 'Value' : ''} />
+                <Label readOnly tabIndex={-1} className='not-editable' value='VIN' />
+                <Value
+                  value={vehicleInformationState.vin}
+                  readOnly={!editable}
+                  onChange={(e) => onFormChange({ e, type: 'VIN' })}
+                  className={editable ? 'editable' : 'not-editable'}
+                  placeholder={editable ? 'VIN' : ''}
+                  maxLength={16}
+                />
               </LabelValueContainer>
               <LabelValueContainer>
-                <Label value='Last 8' readOnly className='not-editable' />
-                <Value value={vehicleInformationState.vin.substring(8)} readOnly className='not-editable' />
+                <Label readOnly tabIndex={-1} className='not-editable' value='Last 8' />
+                <Value value={vehicleInformationState.vin.substring(8)} readOnly tabIndex={-1} className='not-editable' />
               </LabelValueContainer>
             </Contents>
           </CategoryContainer>
@@ -92,7 +105,7 @@ export default function Categories({ editable = false, vehicleInformationState, 
                 <Title
                   value={category.title}
                   readOnly={!editable}
-                  onChange={e => onFormChange({ e, type: 'TITLE', categoryIndex })}
+                  onChange={(e) => onFormChange({ e, type: 'TITLE', categoryIndex })}
                   className={editable ? 'editable' : 'not-editable'}
                   placeholder={editable ? 'Category Title' : ''}
                 />
@@ -110,14 +123,14 @@ export default function Categories({ editable = false, vehicleInformationState, 
                     <Label
                       value={item.label}
                       readOnly={!editable}
-                      onChange={e => onFormChange({ e, type: 'LABEL', categoryIndex, itemIndex })}
+                      onChange={(e) => onFormChange({ e, type: 'LABEL', categoryIndex, itemIndex })}
                       className={editable ? 'editable' : 'not-editable'}
                       placeholder={editable ? 'Label' : ''}
                     />
                     <Value
                       value={item.value}
                       readOnly={!editable}
-                      onChange={e => onFormChange({ e, type: 'VALUE', categoryIndex, itemIndex })}
+                      onChange={(e) => onFormChange({ e, type: 'VALUE', categoryIndex, itemIndex })}
                       className={editable ? 'editable' : 'not-editable'}
                       placeholder={editable ? 'Value' : ''}
                     />

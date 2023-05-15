@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Option, OptionRadio, OptionLabel, OptionsContainer, SearchBar, SearchButton, SearchForm, SearchBoxContainer } from './style';
 
-export default function HomePage() {
+export default function SearchBox() {
   const [formState, setFormState] = useState({
     searchValue: '',
     option: 'unit-number',
