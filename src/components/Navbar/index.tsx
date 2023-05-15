@@ -1,4 +1,4 @@
-import { OuterContainer, LogoContainer, Logo, MenuIcon, LinksContainer, NavLink, LogButton, RemoveVehicleButton } from './style';
+import { OuterContainer, LogoContainer, Logo, MenuIcon, LinksContainer, NavLink, LogoutButton, RemoveVehicleButton, LoginButton } from './style';
 import logo from '../../assets/leasing-logo.png';
 import { FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -20,6 +20,18 @@ export default function Navbar({ vehicleInformationState, vehicleIsInDatabase }:
     } catch (error) {
       console.error('error is here', error);
     }
+  };
+
+  const testLogin = async () => {
+    const response = await fetch(`https://us-central1-truck-reference.cloudfunctions.net/login`, {
+      method: 'POST',
+      body: JSON.stringify({
+        username: 'test',
+        email: 'test@test.com',
+      }),
+    });
+    const { token } = await response.json();
+    auth.login(token);
   };
 
   return (
@@ -46,7 +58,15 @@ export default function Navbar({ vehicleInformationState, vehicleIsInDatabase }:
         ) : (
           <></>
         )}
-        {auth.loggedIn() ? <LogButton>Logout</LogButton> : <LogButton>Login</LogButton>}
+        {auth.loggedIn() ? (
+          <LogoutButton type='button' onClick={auth.logout}>
+            Logout
+          </LogoutButton>
+        ) : (
+          <LoginButton to={'/'} type='button' onClick={testLogin}>
+            Login
+          </LoginButton>
+        )}
       </LinksContainer>
     </OuterContainer>
   );

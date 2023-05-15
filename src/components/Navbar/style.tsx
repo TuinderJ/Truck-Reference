@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { medium, dark, screenSize } from '../../utils/styleUtils';
+import { medium, dark, screenSize, defaultButtonStyles } from '../../utils/styleUtils';
 import { Link } from 'react-router-dom';
 
 export const OuterContainer = styled.div`
@@ -82,16 +82,25 @@ export const RemoveVehicleButton = styled.button`
   ${navStyles}
 `;
 
-export const LogButton = styled.button`
-  background-color: #cfe1fa;
+const logButton = css`
+  ${defaultButtonStyles}
+
   color: ${dark};
-  border: none;
   font-size: inherit;
 
   @media screen and (min-width: ${screenSize}) {
     background-color: ${medium};
+    color: white;
     padding: 0.75rem;
     border-radius: 0.5rem;
-    color: white;
   }
+`;
+
+export const LogoutButton = styled.button`
+  ${logButton}
+`;
+
+export const LoginButton = styled(Link)`
+  ${logButton}
+  text-decoration: none;
 `;
