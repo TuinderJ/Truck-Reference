@@ -90,6 +90,7 @@ export default function Categories({ editable = false, vehicleInformationState, 
                   onChange={(e) => onFormChange({ e, type: 'VIN' })}
                   className={editable ? 'editable' : 'not-editable'}
                   placeholder={editable ? 'VIN' : ''}
+                  required={true}
                   maxLength={16}
                 />
               </LabelValueContainer>

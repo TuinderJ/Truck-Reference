@@ -46,6 +46,8 @@ export type CategoriesOnChange = {
 
 export type CategoryChangeType = 'UNIT NUMBER' | 'CUSTOMER UNIT NUMBER' | 'VIN' | 'CUSTOMER' | 'TITLE' | 'LABEL' | 'VALUE' | 'ADD CATEGORY' | 'REMOVE CATEGORY' | 'ADD ITEM' | 'REMOVE ITEM';
 
+export type LoginStateChange = 'EMAIL' | 'PASSWORD';
+
 export type FetchData = {
   unitNumber?: string;
   customerUnitNumber?: string;

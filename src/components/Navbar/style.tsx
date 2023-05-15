@@ -86,6 +86,7 @@ const logButton = css`
   ${defaultButtonStyles}
 
   color: ${dark};
+  background-color: inherit;
   font-size: inherit;
 
   @media screen and (min-width: ${screenSize}) {

@@ -22,31 +22,15 @@ export default function Navbar({ vehicleInformationState, vehicleIsInDatabase }:
     }
   };
 
-  const testLogin = async () => {
-    const response = await fetch(`https://us-central1-truck-reference.cloudfunctions.net/login`, {
-      method: 'POST',
-      body: JSON.stringify({
-        username: 'test',
-        email: 'test@test.com',
-      }),
-    });
-    const { token } = await response.json();
-    auth.login(token);
-  };
-
   return (
     <OuterContainer>
       <LogoContainer>
         <Link to={'/'}>
           <Logo src={logo} alt='Logo' />
         </Link>
-        {auth.loggedIn() ? (
-          <MenuIcon onClick={handleToggleMenu}>
-            <FaBars />
-          </MenuIcon>
-        ) : (
-          <></>
-        )}
+        <MenuIcon onClick={handleToggleMenu}>
+          <FaBars />
+        </MenuIcon>
       </LogoContainer>
       <LinksContainer id='links-container'>
         {auth.loggedIn() ? <NavLink to={'/new_vehicle'}>New Vehicle</NavLink> : <></>}
@@ -63,7 +47,7 @@ export default function Navbar({ vehicleInformationState, vehicleIsInDatabase }:
             Logout
           </LogoutButton>
         ) : (
-          <LoginButton to={'/'} type='button' onClick={testLogin}>
+          <LoginButton to={'/login'} type='button'>
             Login
           </LoginButton>
         )}
