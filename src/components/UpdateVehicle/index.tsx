@@ -3,8 +3,10 @@ import { MainContainer, NewVehicleForm, TopSubmitButton, BottomSubmitButton } fr
 import { UpdateVehiclePageProps } from '../types';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import auth from '../../utils/auth';
 
 export default function UpdateVehicle({ newVehicle, vehicleInformationState, setVehicleInformationState, setVehicleIsInDatabase }: UpdateVehiclePageProps) {
+  if (!auth.loggedIn()) location.href = '/';
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -60,6 +62,7 @@ export default function UpdateVehicle({ newVehicle, vehicleInformationState, set
       await fetch('https://us-central1-truck-reference.cloudfunctions.net/updateVehicle', { method: 'POST', body: JSON.stringify(vehicleData) });
       setVehicleInformationState({ ...vehicleData });
       setVehicleIsInDatabase(true);
+
       navigate('/');
     } catch (error) {
       console.error('error is here', error);

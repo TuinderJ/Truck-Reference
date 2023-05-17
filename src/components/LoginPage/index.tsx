@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import auth from '../../utils/auth';
-import { Button, FormContainer, Input, InputContainer, InputLabel, InputsContainer, LoginSignupForm, Option, OptionInput, OptionLabel, OptionsContainer, Title } from './style';
+import { Button, FormContainer, Input, InputContainer, InputLabel, InputsContainer, LoginSignupForm, Message } from './style';
 import { LoginStateChange } from '../types';
 
 export default function LoginPage() {
+  if (auth.loggedIn()) location.href = '/';
+
   const [formState, setFormState] = useState({
     email: '',
     password: '',
   });
 
-  const handleFormChange = (e: React.FormEvent<EventTarget>, type: LoginStateChange) => {
+  const handleFormChange = (e: React.FormEvent<EventTarget>, type: LoginStateChange): void => {
     const target = e.currentTarget as HTMLInputElement;
     switch (type) {
       case 'EMAIL':
-        setFormState({ ...formState, email: target.value.toUpperCase() });
+        setFormState({ ...formState, email: target.value });
         break;
       case 'PASSWORD':
         setFormState({ ...formState, password: target.value });
@@ -21,17 +23,13 @@ export default function LoginPage() {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent<EventTarget>): void => {
+  const handleFormSubmit = async (e: React.FormEvent<EventTarget>): Promise<void> => {
     e.preventDefault();
-    console.log('submit');
-  };
-
-  const testLogin = async () => {
     const response = await fetch(`https://us-central1-truck-reference.cloudfunctions.net/login`, {
       method: 'POST',
       body: JSON.stringify({
-        username: 'test',
-        email: 'test@test.com',
+        email: formState.email.toUpperCase(),
+        password: formState.password,
       }),
     });
     const { token } = await response.json();
@@ -43,7 +41,6 @@ export default function LoginPage() {
       <FormContainer>
         <LoginSignupForm onSubmit={handleFormSubmit}>
           <InputsContainer>
-            <Title>Login</Title>
             <InputContainer>
               <InputLabel htmlFor='email'>Email:</InputLabel>
               <Input required id='email' type='email' value={formState.email} onChange={(e) => handleFormChange(e, 'EMAIL')} />
@@ -54,6 +51,9 @@ export default function LoginPage() {
             </InputContainer>
           </InputsContainer>
           <Button>Login</Button>
+          <Message>
+            If you need an accound, please <a href='mailto:tuinderj@rushenterprises.com?subject=Truck Reference Account Request'>email</a> requesing an account.
+          </Message>
         </LoginSignupForm>
       </FormContainer>
     </>

@@ -18,7 +18,7 @@ export const FormContainer = styled.div`
   }
 `;
 
-export const LoginSignupForm = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -35,19 +35,13 @@ export const Message = styled.p`
   text-align: center;
 `;
 
-export const InputsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-`;
-
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 `;
 
-export const InputLabel = styled.label`
+export const Label = styled.label`
   text-align: center;
   font-size: 1.5rem;
 `;
@@ -57,7 +51,7 @@ export const Input = styled.input`
   padding: 0.5rem;
 `;
 
-export const Button = styled.button`
+export const SubmitButton = styled.button`
   ${defaultButtonStyles}
   font-size: 1.5rem;
   padding: 0.75rem;

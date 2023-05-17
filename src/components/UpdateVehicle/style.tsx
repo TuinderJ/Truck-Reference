@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { defaultButtonStyles, medium, screenSize } from '../../utils/styleUtils';
+import { dark, defaultButtonStyles, medium, screenSize } from '../../utils/styleUtils';
 
 export const MainContainer = styled.div``;
 
@@ -10,7 +10,6 @@ export const NewVehicleForm = styled.form`
 
 const submitButtonStyle = css`
   ${defaultButtonStyles}
-  margin: 1rem 0;
   border-radius: 0;
   background-color: ${medium};
   font-size: 1.5rem;
@@ -21,6 +20,7 @@ const submitButtonStyle = css`
     border-radius: 0.5rem;
     width: max-content;
     align-self: flex-end;
+    background-color: ${dark};
   }
 `;
 
