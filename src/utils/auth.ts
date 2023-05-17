@@ -11,6 +11,14 @@ class AuthService {
     return !!token && !this.isTokenExpired(token);
   }
 
+  isServiceManager(): boolean {
+    return this.isAdmin() || (this.loggedIn() && true);
+  }
+
+  isAdmin(): boolean {
+    return this.loggedIn() && false;
+  }
+
   isTokenExpired(token: string): boolean {
     try {
       const decoded: any = decode(token);

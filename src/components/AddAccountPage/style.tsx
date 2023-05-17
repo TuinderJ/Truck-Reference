@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { screenSize, defaultButtonStyles } from '../../utils/styleUtils';
+import { screenSize, defaultButtonStyles, boxShadow } from '../../utils/styleUtils';
 
 export const FormContainer = styled.div`
   position: absolute;
@@ -27,7 +27,7 @@ export const Form = styled.form`
     width: 40rem;
     background-color: white;
     padding: 4rem;
-    box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.8);
+    ${boxShadow};
   }
 `;
 

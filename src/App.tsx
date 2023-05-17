@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Route, Routes } from 'react-router';
 
 import './App.css';
-import { Navbar, HomePage, LoginPage, UpdateVehicle, AddAccountPage } from './components';
+import { Navbar, HomePage, LoginPage, UpdateVehicle, AddAccountPage, UserManagement } from './components';
 
 function App() {
   const [vehicleInformationState, setVehicleInformationState] = useState({
@@ -44,6 +44,7 @@ function App() {
             element={<UpdateVehicle newVehicle={false} vehicleInformationState={vehicleInformationState} setVehicleInformationState={setVehicleInformationState} setVehicleIsInDatabase={setVehicleIsInDatabase} />}
           />
           <Route path='/add_user' element={<AddAccountPage />} />
+          <Route path='/user_management' element={<UserManagement />} />
         </Routes>
       </main>
     </>

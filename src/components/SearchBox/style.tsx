@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { light, medium, dark, screenSize } from '../../utils/styleUtils';
+import { light, medium, dark, screenSize, boxShadow } from '../../utils/styleUtils';
 
 export const SearchBoxContainer = styled.div`
   @media screen and (min-width: ${screenSize}) {
@@ -7,7 +7,7 @@ export const SearchBoxContainer = styled.div`
     margin: 3rem auto;
     padding: 3rem;
     background-color: white;
-    box-shadow: 0px 1px 5px rgb(129, 129, 129);
+    ${boxShadow}
     border-radius: 0.5rem;
   }
 `;
@@ -50,7 +50,7 @@ export const Option = styled.div`
   &.selected {
     background-color: white;
     border-radius: 0.25rem;
-    box-shadow: 0px 1px 5px rgb(129, 129, 129);
+    ${boxShadow}
   }
 `;
 

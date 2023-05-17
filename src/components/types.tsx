@@ -48,6 +48,24 @@ export type CategoryChangeType = 'UNIT NUMBER' | 'CUSTOMER UNIT NUMBER' | 'VIN' 
 
 export type LoginStateChange = 'EMAIL' | 'PASSWORD';
 
+type UserManagementInputChangeType = 'NAME' | 'EMAIL' | 'USER ACCESS LEVEL' | 'BRANCH';
+
+export type UserManagementInputChange = {
+  e: React.FormEvent<HTMLElement>;
+  type: UserManagementInputChangeType;
+  branchIndex: number;
+  userIndex: number;
+};
+
+type UserManagementPencilClickType = 'NAME' | 'EMAIL' | 'BRANCH';
+
+export type UserManagementPencilClick = {
+  e: React.MouseEvent;
+  type: UserManagementPencilClickType;
+  branchIndex: number;
+  userIndex: number;
+};
+
 export type FetchData = {
   unitNumber?: string;
   customerUnitNumber?: string;

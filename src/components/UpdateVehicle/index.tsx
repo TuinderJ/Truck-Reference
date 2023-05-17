@@ -8,6 +8,7 @@ import auth from '../../utils/auth';
 export default function UpdateVehicle({ newVehicle, vehicleInformationState, setVehicleInformationState, setVehicleIsInDatabase }: UpdateVehiclePageProps) {
   if (!auth.loggedIn()) location.href = '/';
   const navigate = useNavigate();
+  setVehicleIsInDatabase(false);
 
   useEffect(() => {
     if (newVehicle) {

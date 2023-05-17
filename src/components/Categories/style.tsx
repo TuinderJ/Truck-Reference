@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components';
-import { dark, defaultButtonStyles, medium, screenSize } from '../../utils/styleUtils';
+import { boxShadow, dark, defaultButtonStyles, medium, screenSize } from '../../utils/styleUtils';
 
 export const CategoriesContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+  max-width: 120rem;
+  margin: 0 auto;
 `;
 
 export const CategoryList = styled.div`
@@ -24,7 +26,7 @@ export const CategoryList = styled.div`
 export const CategoryContainer = styled.div`
   background-color: white;
   padding: 0.25rem 0.125rem;
-  box-shadow: 0px 1px 5px rgb(129, 129, 129);
+  ${boxShadow};
   display: flex;
   flex-direction: column;
   gap: 0.25rem;

@@ -15,3 +15,7 @@ export const defaultButtonStyles = css`
   border-radius: 0.25rem;
   cursor: pointer;
 `;
+
+export const boxShadow = css`
+  box-shadow: 0px 1px 5px rgb(129, 129, 129);
+`;
