@@ -2,7 +2,7 @@ import { CategoriesContainer, CategoryContainer, CategoryList, Contents, Label, 
 import { Categoryprops, CategoriesOnChange } from '../types';
 import { FaTrash } from 'react-icons/fa';
 
-export default function Categories({ editable = false, vehicleInformationState, setVehicleInformationState }: Categoryprops) {
+export default function Categories({ editable = false, vehicleInformationState, setVehicleInformationState, newVehicle }: Categoryprops) {
   const onFormChange = ({ e, type, categoryIndex, itemIndex }: CategoriesOnChange) => {
     const newVehicleInformationState = { ...vehicleInformationState };
     switch (type) {
@@ -88,7 +88,7 @@ export default function Categories({ editable = false, vehicleInformationState, 
                   value={vehicleInformationState.vin}
                   readOnly={!editable}
                   onChange={(e) => onFormChange({ e, type: 'VIN' })}
-                  className={editable ? 'editable' : 'not-editable'}
+                  className={editable && newVehicle ? 'editable' : 'not-editable'}
                   placeholder={editable ? 'VIN' : ''}
                   required={true}
                   maxLength={16}

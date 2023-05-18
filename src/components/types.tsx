@@ -21,6 +21,7 @@ export type Categoryprops = {
   editable?: boolean;
   vehicleInformationState: VehicleInformation;
   setVehicleInformationState?: React.Dispatch<React.SetStateAction<VehicleInformation>>;
+  newVehicle?: boolean;
 };
 
 export type HomePageProps = {
