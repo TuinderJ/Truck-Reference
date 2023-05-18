@@ -16,7 +16,7 @@ class AuthService {
   }
 
   isAdmin(): boolean {
-    return this.loggedIn() && false;
+    return this.loggedIn() && true;
   }
 
   isTokenExpired(token: string): boolean {

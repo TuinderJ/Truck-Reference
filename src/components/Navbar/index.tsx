@@ -42,6 +42,7 @@ export default function Navbar({ vehicleInformationState, vehicleIsInDatabase }:
         ) : (
           <></>
         )}
+        {auth.isServiceManager() ? <NavLink to={'/user_management'}>Manage Users</NavLink> : <></>}
         {auth.loggedIn() ? (
           <LogoutButton type='button' onClick={auth.logout}>
             Logout

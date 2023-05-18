@@ -48,20 +48,23 @@ export type CategoryChangeType = 'UNIT NUMBER' | 'CUSTOMER UNIT NUMBER' | 'VIN' 
 
 export type LoginStateChange = 'EMAIL' | 'PASSWORD';
 
-type UserManagementInputChangeType = 'NAME' | 'EMAIL' | 'USER ACCESS LEVEL' | 'BRANCH';
+type UserManagementChangeType = 'NAME' | 'EMAIL' | 'USER ACCESS LEVEL' | 'BRANCH';
 
 export type UserManagementInputChange = {
   e: React.FormEvent<HTMLElement>;
-  type: UserManagementInputChangeType;
+  type: UserManagementChangeType;
   branchIndex: number;
   userIndex: number;
 };
 
-type UserManagementPencilClickType = 'NAME' | 'EMAIL' | 'BRANCH';
-
 export type UserManagementPencilClick = {
   e: React.MouseEvent;
-  type: UserManagementPencilClickType;
+  type: UserManagementChangeType;
+  branchIndex: number;
+  userIndex: number;
+};
+
+export type userManagementSubmitChanges = {
   branchIndex: number;
   userIndex: number;
 };
