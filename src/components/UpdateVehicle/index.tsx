@@ -4,11 +4,14 @@ import { UpdateVehiclePageProps } from '../types';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import auth from '../../utils/auth';
+import { connectStorageEmulator } from 'firebase/storage';
 
 export default function UpdateVehicle({ newVehicle, vehicleInformationState, setVehicleInformationState, setVehicleIsInDatabase }: UpdateVehiclePageProps) {
   if (!auth.loggedIn()) location.href = '/';
   const navigate = useNavigate();
-  setVehicleIsInDatabase(false);
+  useEffect(() => {
+    setVehicleIsInDatabase(false);
+  }, []);
 
   useEffect(() => {
     if (newVehicle) {
@@ -60,11 +63,21 @@ export default function UpdateVehicle({ newVehicle, vehicleInformationState, set
     }
 
     try {
-      await fetch('https://us-central1-truck-reference.cloudfunctions.net/updateVehicle', { method: 'POST', body: JSON.stringify(vehicleData) });
-      setVehicleInformationState({ ...vehicleData });
-      setVehicleIsInDatabase(true);
+      let response;
+      if (newVehicle) {
+        response = await fetch('https://us-central1-truck-reference.cloudfunctions.net/addVehicle', { method: 'POST', body: JSON.stringify(vehicleData) });
+      } else {
+        response = await fetch('https://us-central1-truck-reference.cloudfunctions.net/updateVehicle', { method: 'POST', body: JSON.stringify(vehicleData) });
+      }
+      if (response.ok) {
+        setVehicleInformationState({ ...vehicleData });
+        setVehicleIsInDatabase(true);
 
-      navigate('/');
+        navigate('/');
+      } else {
+        const { message } = await response.json();
+        alert(message);
+      }
     } catch (error) {
       console.error('error is here', error);
     }
