@@ -58,7 +58,6 @@ export type UserManagementInputChange = {
 };
 
 export type UserManagementPencilClick = {
-  e: React.MouseEvent;
   type: UserManagementChangeType;
   branchIndex: number;
   userIndex: number;

@@ -3,7 +3,6 @@ import { Button, Container, Icon, Input, NewUserLink, Table, TableBody, TableDat
 import { UserManagementInputChange, UserManagementPencilClick, userManagementSubmitChanges } from '../types';
 import { useState } from 'react';
 import auth from '../../utils/auth';
-import { Link } from 'react-router-dom';
 
 export default function UserManagement() {
   if (!auth.isServiceManager()) location.href = '/';
@@ -54,7 +53,7 @@ export default function UserManagement() {
     ],
   });
 
-  const handlePencilClick = ({ e, type, branchIndex, userIndex }: UserManagementPencilClick): void => {
+  const handlePencilClick = ({ type, branchIndex, userIndex }: UserManagementPencilClick): void => {
     // const target = e.currentTarget as HTMLElement;
     const newUserData = { ...userData };
 
@@ -163,7 +162,7 @@ export default function UserManagement() {
                       onChange={(e) => handleInputChange({ e, type: 'NAME', branchIndex, userIndex })}
                     />
                     {!nameIsEditable ? (
-                      <Icon onClick={(e) => handlePencilClick({ e, type: 'NAME', branchIndex, userIndex })}>
+                      <Icon onClick={() => handlePencilClick({ type: 'NAME', branchIndex, userIndex })}>
                         <FaPencilAlt />
                       </Icon>
                     ) : (
@@ -172,7 +171,7 @@ export default function UserManagement() {
                   </TableData>
                   <TableData>
                     <Input
-                      tabIndex={nameIsEditable ? 0 : -1}
+                      tabIndex={emailIsEditable ? 0 : -1}
                       type='email'
                       value={email}
                       readOnly={!emailIsEditable}
@@ -180,7 +179,7 @@ export default function UserManagement() {
                       onChange={(e) => handleInputChange({ e, type: 'EMAIL', branchIndex, userIndex })}
                     />
                     {!emailIsEditable ? (
-                      <Icon onClick={(e) => handlePencilClick({ e, type: 'EMAIL', branchIndex, userIndex })}>
+                      <Icon onClick={() => handlePencilClick({ type: 'EMAIL', branchIndex, userIndex })}>
                         <FaPencilAlt />
                       </Icon>
                     ) : (
@@ -191,7 +190,7 @@ export default function UserManagement() {
                     <>
                       <TableData>
                         <Input
-                          tabIndex={nameIsEditable ? 0 : -1}
+                          tabIndex={branchIsEditable ? 0 : -1}
                           type='number'
                           readOnly={!branchIsEditable}
                           value={branch.branch}
@@ -200,7 +199,7 @@ export default function UserManagement() {
                           maxLength={4}
                         />
                         {!branchIsEditable ? (
-                          <Icon onClick={(e) => handlePencilClick({ e, type: 'BRANCH', branchIndex, userIndex })}>
+                          <Icon onClick={() => handlePencilClick({ type: 'BRANCH', branchIndex, userIndex })}>
                             <FaPencilAlt />
                           </Icon>
                         ) : (
@@ -218,7 +217,7 @@ export default function UserManagement() {
                           <>
                             <UserAccessLevel>{userAccessLevel}</UserAccessLevel>
                             {!userAccessLevelisEditable && userAccessLevel !== 'Admin' ? (
-                              <Icon onClick={(e) => handlePencilClick({ e, type: 'USER ACCESS LEVEL', branchIndex, userIndex })}>
+                              <Icon onClick={() => handlePencilClick({ type: 'USER ACCESS LEVEL', branchIndex, userIndex })}>
                                 <FaPencilAlt />
                               </Icon>
                             ) : (
@@ -233,13 +232,13 @@ export default function UserManagement() {
                   )}
                   <TableData>
                     {changesRequested ? (
-                      <Button type='button' onClick={(e) => handleSubmitChanges({ branchIndex, userIndex })}>
+                      <Button type='button' onClick={() => handleSubmitChanges({ branchIndex, userIndex })}>
                         Submit Changes
                       </Button>
                     ) : (
                       <></>
                     )}
-                    <Button type='button' className={deleteConfirmation ? 'delete-confirmation' : ''} onClick={(e) => handleDeleteUser({ branchIndex, userIndex })}>
+                    <Button type='button' className={deleteConfirmation ? 'delete-confirmation' : ''} onClick={() => handleDeleteUser({ branchIndex, userIndex })}>
                       {deleteConfirmation ? 'Confirm Delete' : 'Delete User'}
                     </Button>
                   </TableData>

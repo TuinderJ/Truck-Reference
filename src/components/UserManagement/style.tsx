@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { medium, dark, screenSize, defaultButtonStyles, boxShadow, light } from '../../utils/styleUtils';
+import styled from 'styled-components';
+import { medium, screenSize, defaultButtonStyles, boxShadow, light } from '../../utils/styleUtils';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
